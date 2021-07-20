@@ -27,7 +27,7 @@ camera.position.set(0.6, 0.1, 0.4)
 const x = -1,
   y = 1 / 4,
   z = -1 / 2
-const lookAt = new Vector3(0, y / 2, 0)
+const lookAt = new Vector3(x / 2, y / 2, z / 2)
 
 const gridHelper = new GridHelper(2, 20)
 scene.add(gridHelper)
