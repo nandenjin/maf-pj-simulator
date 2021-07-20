@@ -20,6 +20,14 @@ module.exports = {
         test: /\.s[ac]ss/i,
         use: ['style-loader', 'css-loader', 'sass-loader'],
       },
+      {
+        test: /\.(mp4|jpg)/i,
+        loader: 'file-loader',
+      },
+      {
+        test: /\.glsl$/i,
+        loader: 'raw-loader',
+      },
     ],
   },
   resolve: {
