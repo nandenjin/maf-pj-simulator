@@ -88,7 +88,7 @@ const boxMaterial = new ShaderMaterial({
   uniforms: {
     baseTexture: { value: baseTexture },
     contentTexture: { value: contentTexture },
-    baseOpacity: { value: 0.5 },
+    baseOpacity: { value: 0.2 },
   },
   vertexShader: require('./vertex.glsl').default,
   fragmentShader: require('./fragment.glsl').default,
