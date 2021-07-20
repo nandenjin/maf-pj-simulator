@@ -13,8 +13,11 @@ import {
   TextureLoader,
 } from 'three'
 import { OrbitControls } from 'three-orbitcontrols-ts'
+import { GUI } from 'dat.gui'
 const sampleVideo = require('./sample.webm').default
 const baseTextureImage = require('./texture.jpg').default
+
+const gui = new GUI()
 
 const scene = new Scene()
 const renderer = new WebGLRenderer({ antialias: true })
@@ -88,13 +91,17 @@ const boxMaterial = new ShaderMaterial({
   uniforms: {
     baseTexture: { value: baseTexture },
     contentTexture: { value: contentTexture },
-    baseOpacity: { value: 0.2 },
+    baseOpacity: { value: 0.1 },
   },
   vertexShader: require('./vertex.glsl').default,
   fragmentShader: require('./fragment.glsl').default,
 })
 const box = new Mesh(boxGeometry, boxMaterial)
 scene.add(box)
+
+gui
+  .add(boxMaterial.uniforms.baseOpacity, 'value', 0, 0.5, 0.01)
+  .name('baseOpacity')
 
 renderer.domElement.classList.add('renderer')
 document.body.appendChild(renderer.domElement)
