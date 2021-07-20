@@ -21,7 +21,7 @@ module.exports = {
         use: ['style-loader', 'css-loader', 'sass-loader'],
       },
       {
-        test: /\.(mp4|jpg)/i,
+        test: /\.(mp4|webm|jpg)/i,
         loader: 'file-loader',
       },
       {

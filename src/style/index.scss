@@ -7,3 +7,18 @@ body {
   color: #fff;
   background-color: #000;
 }
+
+.video {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 300px;
+  height: auto;
+  border: 1px solid #444;
+}
+
+.file-picker {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+}
