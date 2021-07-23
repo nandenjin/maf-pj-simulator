@@ -11,11 +11,15 @@ import {
   Vector3,
   ShaderMaterial,
   TextureLoader,
+  PlaneBufferGeometry,
+  RepeatWrapping,
 } from 'three'
 import { OrbitControls } from 'three-orbitcontrols-ts'
 import { GUI } from 'dat.gui'
+import { Water, WaterOptions } from './Water'
 const sampleVideo = require('./sample.webm').default
 const baseTextureImage = require('./texture.jpg').default
+const waterNormalTexture = require('./waternormals.jpg').default
 
 const gui = new GUI()
 
@@ -31,6 +35,8 @@ const lookAt = new Vector3(x / 2, y / 2, z / 2)
 
 const gridHelper = new GridHelper(2, 20)
 scene.add(gridHelper)
+
+gui.add(gridHelper, 'visible').name('showGrid')
 
 const video = document.createElement('video')
 video.classList.add('video')
@@ -103,6 +109,30 @@ gui
   .add(boxMaterial.uniforms.baseOpacity, 'value', 0, 0.5, 0.01)
   .name('baseOpacity')
 
+const waterOptions: WaterOptions = {
+  textureWidth: 512,
+  textureHeight: 512,
+  waterNormals: new TextureLoader().load(waterNormalTexture, texture => {
+    texture.wrapS = texture.wrapT = RepeatWrapping
+  }),
+  sunDirection: new Vector3(),
+  sunColor: 0xffffff,
+  waterColor: 0x000000,
+  distortionScale: 0.05,
+}
+const water = new Water(new PlaneBufferGeometry(5, 5), waterOptions)
+water.rotateX(-Math.PI / 2)
+water.visible = false
+scene.add(water)
+
+gui.add(water, 'visible').name('showWater')
+const waterOptionsGui = gui.addFolder('waterOptions')
+waterOptionsGui
+  .add(water.material.uniforms.distortionScale, 'value', 0, 1, 0.01)
+  .name('distortionScale')
+waterOptionsGui.addColor(waterOptions, 'sunColor')
+waterOptionsGui.addColor(waterOptions, 'waterColor')
+
 renderer.domElement.classList.add('renderer')
 document.body.appendChild(renderer.domElement)
 document.body.appendChild(video)
@@ -114,6 +144,7 @@ camera.lookAt(lookAt)
 function renderTick() {
   window.requestAnimationFrame(renderTick)
   contentTexture.needsUpdate = true
+  water.material.uniforms['time'].value += 0.02 / 60.0
   renderer.render(scene, camera)
 }
 
