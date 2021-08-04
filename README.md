@@ -6,6 +6,10 @@
 ![CI status](https://img.shields.io/github/workflow/status/nandenjin/tmaf-pj-simulator/CI?style=flat-square)
 ![GitHub last commit](https://img.shields.io/github/last-commit/nandenjin/tmaf-pj-simulator?style=flat-square)
 
+Browser-based simulator for video projection mapping @ Tsukuba Media Art Festival 2021.
+
+![Screenshot](https://user-images.githubusercontent.com/7803255/128218270-354d6bc1-0719-4f82-b18f-f5da2d866632.png)
+
 ## Credits
 
 Sample video contains resources which are under Creative Commons License.
